@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from preprocess import *
 import seaborn as sns
-import plotly.graph_objects as go
+
 
 
 #
@@ -106,7 +106,7 @@ def scatter_deaths_cases1M(dataframe):
     plt.show()
 
 def death_per_1M(dataframe):
-    df_dM = dataframe.sort_values(by='Deaths/1MPop', ascending=True).tail(15)['Deaths/1MPop']
+    df_dM = dataframe.sort_values(by='Deaths_1MPop', ascending=True).tail(15)['Deaths_1MPop']
 
 
     df_dM.plot(kind='barh', figsize=(10, 10), rot=0, color='red')
@@ -148,16 +148,15 @@ def cases_per_1M(dataframe):
 #Bieu do hinh quat
 # % so nguoi chet tren toan TG:
 def cases_pie_charts(dataframe):
-    df_top15 = dataframe.sort_values(by='TotalCases', ascending=True).tail(15)['TotalCases']
-    df_top15['TotalCases'].plot(kind='pie',
-                                figsize=(5, 6),
-                                autopct='%1.1f%%', # add in percentages
-                                startangle=90,     # start angle 90° (Africa)
-                                shadow=False,       # add shadow
-                                )
+    dataframe['TotalCases'].plot(kind='pie',
+                                 figsize=(5, 6),
+                                 autopct='%1.1f%%',  # add in percentages
+                                 startangle=90,  # start angle 90° (Africa)
+                                 shadow=False,  # add shadow
+                                 )
 
     plt.title('Immigration to Canada by Continent [1980 - 2013]')
-    plt.axis('equal') # Sets the pie chart to look like a circle.
+    plt.axis('equal')  # Sets the pie chart to look like a circle.
 
     plt.show()
 
@@ -170,7 +169,7 @@ def cases_pie_charts(dataframe):
 # scatter_deaths_cases1M(df)
 # death_per_1M(df)
 # cases_per_1M(df)
-# cases_pie_charts(df)
+cases_pie_charts(df)
 
 
 
