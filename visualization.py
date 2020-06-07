@@ -150,6 +150,45 @@ def cases_pie_charts(dataframe):
     plt.show()
 
 
+def top15_recovery_rate(dataframe):
+    df_top15 = dataframe[['TotalCases', 'TotalRecovered']]
+    df_top15['RecoveryRate'] = df_top15.apply(lambda row: row.TotalRecovered / row.TotalCases, axis = 1)
+    df_top15 = df_top15.sort_values(by='RecoveryRate', ascending=True).tail(15)['TotalCases']
+    print(df_top15)
+    # df_top15 = pd.DataFrame(df_top15.sort_values(by='RecoveryRate', ascending=True).tail(15)['RecoveryRate'])
+    # print(df_top15)
+
+    df_top15.plot(kind='barh', figsize=(10, 10), color='green')
+    plt.title("Top 15 Countries have the highest revovery rate")
+    plt.xlabel('Recovery rate')
+    plt.ylabel('Countries')
+    # Annotate Text
+    for index, value in enumerate(df_top15):
+        print(index, value)
+        label=format(int(value), ',')
+        plt.annotate(label, xy=(value,index), fontsize=10, color='black')
+
+    plt.show()
+
+#Top 15 nuoc thuc hien xet nghiem nhieu nhat va ket qua dat duoc /1M
+def top15_bar_chart(dataframe):
+    # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.bar.html
+    cases =['Tests_1MPop', 'TotCases_1MPop', 'Deaths_1MPop']
+    #Bar Chart with Pandas
+    dataframe.sort_values(by=['Tests_1MPop'], inplace=True, ascending=False)
+    dataframe.head(15).plot.bar(y=cases)
+    plt.ylabel('Case')
+    plt.show()
+
+
+# https://github.com/TrainingByPackt/Interactive-Data-Visualization-with-Python/blob/master/Lesson02/Exercise15.ipynb
+## set the plot style to include ticks on the axes.
+
+# sns.set(style="white")
+#
+#
+# sns.kdeplot(df.ActiveCases, df.SeriousCritical, shade=True, color = 'red')
+# plt.show()
 
 # Thuc thi
 
@@ -159,8 +198,11 @@ def cases_pie_charts(dataframe):
 # death_per_1M(df)
 # cases_per_1M(df)
 # cases_pie_charts(df)
+# top15_bar_chart(df)
 
 
+#Fixxing
+#top15_recovery_rate(df)
 
 
 
