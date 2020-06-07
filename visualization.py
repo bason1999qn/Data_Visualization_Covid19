@@ -174,18 +174,6 @@ def cases_pie_charts(dataframe):
 
 
 
-#
-# df['TotalCases'].plot(kind='pie',
-#                             figsize=(5, 6),
-#                             autopct='%1.1f%%', # add in percentages
-#                             startangle=90,     # start angle 90° (Africa)
-#                             shadow=False,       # add shadow
-#                             )
-#
-# plt.title('Immigration to Canada by Continent [1980 - 2013]')
-# plt.axis('equal') # Sets the pie chart to look like a circle.
-#
-# plt.show()
 
 
 
