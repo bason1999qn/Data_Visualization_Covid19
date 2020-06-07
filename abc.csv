@@ -1,4 +1,4 @@
-Country,TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,SeriousCritical,TotCases/1MPop,Deaths/1MPop,TotalTests,Tests/1MPop,Population
+Country,TotalCases,NewCases,TotalDeaths,NewDeaths,TotalRecovered,ActiveCases,SeriousCritical,TotCases_1MPop,Deaths_1MPop,TotalTests,Tests_1MPop,Population
 USA,1881205,21882.0,108059.0,1134.0,645974.0,1127172.0,17114.0,5686.0,327.0,18603174.0,56228.0,330854064.0
 Brazil,556668,27263.0,31278.0,1232.0,240627.0,284763.0,8318.0,2620.0,147.0,930013.0,4378.0,212442762.0
 Russia,423741,8863.0,5037.0,182.0,186985.0,231719.0,2300.0,2904.0,35.0,11151622.0,76418.0,145929848.0

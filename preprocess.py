@@ -13,6 +13,8 @@ def get_data(filename):
 def data_preprocessing(dataframe):
     # remove space:
     dataframe.columns = dataframe.columns.str.replace(' ', '')
+    # replace / to _
+    dataframe.columns = dataframe.columns.str.replace('/', '_')
     # rename:
     dataframe.rename(columns={'Country,Other': 'Country', 'Serious,Critical': 'SeriousCritical'}, inplace=True)
     # replace NaN value to 0
