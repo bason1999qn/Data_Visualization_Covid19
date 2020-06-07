@@ -1,0 +1,8 @@
+Ý tưởng trực quan:
+- Top 10-15 nước có số người mắc cao nhất.
+- trực quan cột giữa các nước có số ca mắc/ ca phục hồi
+
+
+*Lưu ý: 
+Một số dữ liệu bị lỗi ở cột Total cases, do đó được tính lại bằng công thức Total cases = Total Deaths + Total Recovered + Active Cases.
+
