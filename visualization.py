@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from preprocess import *
 import seaborn as sns
+import plotly.graph_objects as go
 
 
 #
@@ -124,7 +125,7 @@ def death_per_1M(dataframe):
 
 #cases per million people
 def cases_per_1M(dataframe):
-    df_dM = dataframe.sort_values(by='TotCases/1MPop', ascending=True).tail(15)['TotCases/1MPop']
+    df_dM = dataframe.sort_values(by='TotCases_1MPop', ascending=True).tail(15)['TotCases_1MPop']
 
 
     df_dM.plot(kind='barh', figsize=(10, 10), rot=0, color='red')
@@ -139,6 +140,7 @@ def cases_per_1M(dataframe):
         plt.annotate(label, xy=(value-50,index-0.11), fontsize=7, color='blue')
 
     plt.show()
+
 
 
 
@@ -158,14 +160,19 @@ def cases_pie_charts(dataframe):
     plt.axis('equal') # Sets the pie chart to look like a circle.
 
     plt.show()
+
+
+
 # Thuc thi
 
 # top15(df)
 # scatter_deaths_cases(df)
-scatter_deaths_cases1M(df)
+# scatter_deaths_cases1M(df)
 # death_per_1M(df)
-# cases_per_1M(df)
+cases_per_1M(df)
 # cases_pie_charts(df)
+
+
 
 
 #
