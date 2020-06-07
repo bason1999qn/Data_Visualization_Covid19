@@ -169,7 +169,7 @@ def cases_pie_charts(dataframe):
 # scatter_deaths_cases(df)
 # scatter_deaths_cases1M(df)
 # death_per_1M(df)
-cases_per_1M(df)
+# cases_per_1M(df)
 # cases_pie_charts(df)
 
 
