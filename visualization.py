@@ -7,17 +7,6 @@ import seaborn as sns
 
 
 
-#
-# #***Tien xu ly du lieu********************:
-# #read dataframe from csv file
-# df = pd.read_csv('19thg5_test.csv', encoding='unicode_escape')
-# #replace NaN value to 0
-# df = df.fillna(0)
-# #Xoa row tong hop:
-# df = df[:-1]
-# #Xoa cot chua du lieu k dung den:
-# df= df.drop("#", axis=1)
-# print(df)
 
 # *** Truc quan hoa du lieu*************
 # Lay du lieu vao bien df
