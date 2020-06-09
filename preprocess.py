@@ -8,16 +8,14 @@ def get_data(filename):
     return df
 
 # Tien xu ly du lieu
-
-
 def data_preprocessing(dataframe):
-    # remove space:
+    # remove space (xoa dau cach):
     dataframe.columns = dataframe.columns.str.replace(' ', '')
-    # replace / to _
+    # replace / to _ (Bien doi ky tu '/' sang '_')
     dataframe.columns = dataframe.columns.str.replace('/', '_')
-    # rename:
+    # rename (Doi ten cac cot sao cho hop ly)
     dataframe.rename(columns={'Country,Other': 'Country', 'Serious,Critical': 'SeriousCritical'}, inplace=True)
-    # replace NaN value to 0
+    # replace NaN value to 0 (Chuyen o trong thanh gia tri 0)
     dataframe = dataframe.fillna(0)
     # Xoa row tong hop:
     dataframe = dataframe[:-1]
