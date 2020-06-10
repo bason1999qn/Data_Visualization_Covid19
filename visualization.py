@@ -18,6 +18,7 @@ df.to_csv("abc.csv")
 
 # Cac ham truc quan
 # Top 15 nuoc co so ca nhiem cao nhat
+#1712732
 def top15_TotalCases(dataframe):
     #Sap xep top 15 theo tong so ca mac
     df_top15 = dataframe.sort_values(by='TotalCases', ascending=True).tail(15)['TotalCases']
@@ -43,7 +44,7 @@ def top15_TotalCases(dataframe):
 # Pie Charts
 
 
-
+#1712732
 # Scatter Plots
 # link: https://python-graph-gallery.com/46-add-text-annotation-on-scatterplot/
 def scatter_deaths_cases(dataframe):
@@ -70,7 +71,7 @@ def scatter_deaths_cases(dataframe):
 
     plt.show()
 
-
+#1712732
 def scatter_deaths_cases1M(dataframe):
     p1 = sns.regplot(data=dataframe, x="TotCases_1MPop", y="Deaths_1MPop", fit_reg=False, marker="o", color="skyblue",
                      scatter_kws={'s':50})
@@ -92,6 +93,7 @@ def scatter_deaths_cases1M(dataframe):
 
     plt.show()
 
+#1712732
 def death_per_1M(dataframe):
     df_dM = dataframe.sort_values(by='Deaths_1MPop', ascending=True).tail(15)['Deaths_1MPop']
 
@@ -109,15 +111,15 @@ def death_per_1M(dataframe):
 
     plt.show()
 
-
+#1712732
 #cases per million people
 def cases_per_1M(dataframe):
     df_dM = dataframe.sort_values(by='TotCases_1MPop', ascending=True).tail(15)['TotCases_1MPop']
 
 
     df_dM.plot(kind='barh', figsize=(10, 10), rot=0, color='red')
-    plt.title('Top 15 Countries deaths per 1M')
-    plt.xlabel('Number of Immigrants')
+    plt.title('Top 15 Countries cases per 1M')
+    plt.xlabel('Number of cases')
     plt.ylabel('Countries')
     # Annotate Text
     for index, value in enumerate(df_dM):
@@ -128,9 +130,7 @@ def cases_per_1M(dataframe):
 
     plt.show()
 
-
-
-
+#1712732
 # autopct create %, start angle represent starting point
 #Bieu do hinh quat
 # % so nguoi chet tren toan TG:
@@ -148,7 +148,7 @@ def cases_pie_charts(dataframe):
 
     plt.show()
 
-
+#Suong
 def top15_recovery_rate(dataframe):
     df_top15 = dataframe[['TotalCases', 'TotalRecovered']]
     df_top15['RecoveryRate'] = df_top15.apply(lambda row: row.TotalRecovered / row.TotalCases, axis = 1)
@@ -169,6 +169,17 @@ def top15_recovery_rate(dataframe):
 
     plt.show()
 
+#Suong
+def top10_death_on_total(dataframe):
+    dataframe = dataframe.head(10)
+    dataframe['DeathOnTotal'] = dataframe.apply(lambda row: row.TotalDeaths / row.TotalCases, axis = 1)
+    dataframe['ActiveAndRecovered'] = dataframe.apply(lambda row: 1 - row.DeathOnTotal, axis = 1)
+    dataframe = dataframe[['DeathOnTotal', 'ActiveAndRecovered']]
+
+    dataframe.plot(kind='bar', stacked=True, figsize=(10, 10), color=['red', 'orange'])
+    plt.xticks(rotation=45)
+
+    plt.show()
 #Top 15 nuoc thuc hien xet nghiem nhieu nhat va ket qua dat duoc /1M
 def top15_bar_chart(dataframe):
     # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.bar.html
@@ -179,7 +190,7 @@ def top15_bar_chart(dataframe):
     plt.ylabel('Case')
     plt.show()
 
-
+#Son
 # Ti le nguoi dươc xet nghiem so voi so ca nhiem
 def scatter_test_newcases(dataframe):
     # df.plot(data = df, label = 'Country', kind='scatter', x='Total Cases', y='Total Deaths', figsize=(10, 6), color='darkblue')
@@ -204,36 +215,85 @@ def scatter_test_newcases(dataframe):
 
     plt.show()
 
+#Son
+def top100_serious(dataframe):
+    # https://blog.quantinsti.com/creating-heatmap-using-python-seaborn/#:~:text=A%20heatmap%20is%20a%20two,as%20per%20the%20creator's%20requirement.
+    top15serious = pd.DataFrame(index=dataframe.index, columns=['ratio', 'Yrows', 'Xcols'])
 
-def sctter_test_cases(dataframe):
-    newdf = pd.DataFrame()
+    top15serious['ratio'] = dataframe['SeriousCritical'] * 100 / dataframe['TotalCases']
+    top15serious = top15serious.head(100)
 
-    newdf['Country'] = dataframe['Country']
-    newdf['TestPerPopulation'] = dataframe['TotalTests'] / dataframe['Population']
-    newdf['NewCasesPerPopulation'] = dataframe['NewCases'] / dataframe['Population']
-    newdf.set_index('Country', inplace=True)
-    newdf = newdf.fillna(0)
-    newdf
-    # p1 = sns.regplot(data=newdf, y="NewCasesPerPopulation", x="TestPerPopulation", fit_reg=False, marker="o",
-    #                  color="red",
-    #                  scatter_kws={'s': 50})
-    # for line in range(0, 15):
-    #     p1.text(newdf.TestPerPopulation[line] + 0.2, newdf.NewCasesPerPopulation[line], newdf.index[line],
-    #             horizontalalignment='left', size='xx-small', color='black', weight='semibold')
-    # plt.title('Ratio of TotalTests to Population & Ratio of NewCases to Population')
-    # plt.xlabel('Ratio of TotalTests to Population')
-    # plt.ylabel('Ratio of NewCases to Population')
-    # # Chay duong phan tach tuyen tinh
-    # y = newdf['NewCasesPerPopulation']  # year on x-axis
-    # x = newdf['TestPerPopulation']  # total on y-axis
-    # # fit tra ve [a b] voi a,b la he so trong y = ax + b
-    # fit = np.polyfit(x, y, deg=1)
-    # plt.plot(x, fit[0] * x + fit[1], color='blue')  # recall that x is the Years
-    # # plt.annotate('y={0:.0f} x + {1:.0f}'.format(fit[0], fit[1]), xy=(2000, 150000))
-    #
-    # plt.show()
+    symbol = ((np.asarray(top15serious.index.values.tolist())).reshape(10, 10))
+    perchange = ((np.asarray(top15serious['ratio'])).reshape(10, 10))
+    # print(symbol)
+    # print(perchange)
+    listx = []
+    listy = []
+    for i in range(1, 11):
+        for j in range(10):
+            listy.append(i)
+        listx.append(list(range(1, 11)))
+    listx = np.asarray(listx).reshape(100)
+    listy = np.asarray(listy).reshape(100)
+    # print(listx)
+    # print(listy)
+    top15serious['Yrows'] = listy
+    top15serious['Xcols'] = listx
+    result = top15serious.pivot(index='Yrows', columns='Xcols', values='ratio')
+    # print(result)
+    labels = (np.asarray(["{0} \n {1:.4f}".format(symb, value)
+                          for symb, value in zip(symbol.flatten(),
+                                                 perchange.flatten())])
+              ).reshape(10, 10)
+    # Define the plot
+    fig, ax = plt.subplots(figsize=(15, 10))
 
+    # Add title to the heat map
+    title = "Ratio Serious Cases to Total Cases"
 
+    # Set the font size and distance of the title from the plot
+    plt.title(title, fontsize=20)
+    ttl = ax.title
+    ttl.set_position([0.5, 1.05])
+
+    # Hide ticks for X & Y axis
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    # Remove the axes
+    ax.axis('off')
+
+    # Create the heatmap
+    sns.heatmap(result, annot=labels, fmt="", cmap='RdYlGn', linewidths=0.30, ax=ax)
+
+    plt.show()
+
+# Ti le xet nghiem so voi dan so & ti le ca nhiem moi so voi dan so
+def scatter_test_cases(dataframe):
+    newdf = pd.DataFrame(columns=['TestPerPopulation', 'NewCasesPerPopulation'])
+    newdf['TestPerPopulation'] = dataframe['TotalTests'] * 100 / dataframe['Population']
+    newdf['NewCasesPerPopulation'] = dataframe['NewCases'] * 100 / dataframe['Population']
+    newdf = newdf.head(30)
+    p1 = sns.regplot(data=newdf, y="NewCasesPerPopulation", x="TestPerPopulation", fit_reg=False, marker="o",
+                     color="red",
+                     scatter_kws={'s': 50})
+    for line in range(0, 30):
+        p1.text(newdf.TestPerPopulation[line] + 0.2, newdf.NewCasesPerPopulation[line], dataframe.index[line],
+                horizontalalignment='left', size='xx-small', color='black', weight='semibold')
+    plt.title('Ratio of TotalTests to Population & Ratio of NewCases to Population')
+    plt.xlabel('Ratio of TotalTests to Population')
+    plt.ylabel('Ratio of NewCases to Population')
+    # Chay duong phan tach tuyen tinh
+    y = newdf['NewCasesPerPopulation']  # year on x-axis
+    x = newdf['TestPerPopulation']  # total on y-axis
+    # fit tra ve [a b] voi a,b la he so trong y = ax + b
+    fit = np.polyfit(x, y, deg=1)
+    plt.plot(x, fit[0] * x + fit[1], color='blue')  # recall that x is the Years
+    # plt.annotate('y={0:.0f} x + {1:.0f}'.format(fit[0], fit[1]), xy=(2000, 150000))
+
+    plt.show()
+
+#1712732
 def top10_total_death_recovered(dataframe):
     dataframe = dataframe.head(10)[['TotalCases', 'TotalDeaths', 'TotalRecovered']]
     dataframe.plot(kind='bar', figsize=(10, 10))
@@ -241,6 +301,9 @@ def top10_total_death_recovered(dataframe):
 
     plt.show()
 
+
+#1712732
+# https://github.com/MrinmoiHossain/Online-Courses-Learning/blob/master/Coursera/Data%20Visualization%20with%20Python-IBM/Week-2/Excercise/Histograms.ipynb
 # So ca mac moi ngay hien tai
 def histogram_NewCases(dataframe):
     dataframe['NewCases'].plot(kind='hist')
@@ -248,14 +311,9 @@ def histogram_NewCases(dataframe):
     plt.ylabel('So quoc gia') # add y-label
     plt.xlabel('So ca mac moi') # add x-label
     plt.show()
-# https://github.com/TrainingByPackt/Interactive-Data-Visualization-with-Python/blob/master/Lesson02/Exercise15.ipynb
-## set the plot style to include ticks on the axes.
 
-# sns.set(style="white")
-#
-#
-# sns.kdeplot(df.ActiveCases, df.SeriousCritical, shade=True, color = 'red')
-# plt.show()
+
+
 
 # Thuc thi
 
@@ -268,7 +326,8 @@ def histogram_NewCases(dataframe):
 # top15_bar_chart(df)
 # histogram_NewCases(df)
 # scatter_test_newcases(df)
-# 5chjciuiitop10_total_death_recovered(df)
+# top10_total_death_recovered(df)
+
 #Fixxing
 #top15_recovery_rate(df)
 
