@@ -34,7 +34,6 @@ def top15_TotalCases(dataframe):
         plt.annotate(label, xy=(value-500,index-0.10), fontsize=7, color='red')
 
     plt.show()
-
 # ti le tu vong, phuc hoi/ so ca mac
 # x = df.loc[:,"Total Cases"].median()
 
@@ -100,7 +99,7 @@ def death_per_1M(dataframe):
 
     df_dM.plot(kind='barh', figsize=(10, 10), rot=0, color='red')
     plt.title('Top 15 Countries deaths per 1M')
-    plt.xlabel('Number of Immigrants')
+    plt.xlabel('Number of deaths/1M')
     plt.ylabel('Countries')
     # Annotate Text
     for index, value in enumerate(df_dM):
@@ -110,6 +109,7 @@ def death_per_1M(dataframe):
         plt.annotate(label, xy=(value-50,index-0.11), fontsize=7, color='blue')
 
     plt.show()
+
 
 #1712732
 #cases per million people
